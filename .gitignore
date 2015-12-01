@@ -1,0 +1,4 @@
+*.o
+*.list
+dmg2img
+vfdecrypt
