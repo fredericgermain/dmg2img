@@ -165,15 +165,6 @@ int main(int argc, char *argv[])
 		printf("ERROR: Can't open input file %s\n", input_file);
 		return 0;
 	}
-	if (output_file)
-		FOUT = fopen(output_file, "wb");
-	else
-		FOUT = NULL;
-	if (FOUT == NULL) {
-		printf("ERROR: Can't create output file %s\n", output_file);
-		fclose(FIN);
-		return 0;
-	}
 	//parsing koly block
 	fseeko(FIN, -0x200, SEEK_END);
 	read_kolyblk(FIN, &kolyblk);
@@ -214,7 +205,7 @@ int main(int argc, char *argv[])
 		error_dmg_corrupted();
 	}
 	if (verbose) {
-		if (input_file && output_file)
+		if (input_file && (listparts || output_file) )
 			printf("%s --> %s\n\n", input_file, listparts ? "(partition list)" : output_file);
 	}
 	if (debug)
@@ -354,6 +345,15 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 		
+	if (output_file)
+		FOUT = fopen(output_file, "wb");
+	else
+		FOUT = NULL;
+	if (FOUT == NULL) {
+		printf("ERROR: Can't create output file %s\n", output_file);
+		fclose(FIN);
+		return 0;
+	}
 	if (verbose)
 		printf("\ndecompressing:\n");
 
