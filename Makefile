@@ -1,5 +1,5 @@
 #CC = gcc
-CFLAGS = -O2 -Wall
+CFLAGS = -O0 -g3 -Wall
 BIN_DIR = ${DESTDIR}/usr/bin
 
 all: dmg2img vfdecrypt 
